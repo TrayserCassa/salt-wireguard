@@ -25,7 +25,4 @@ wireguard_private_key:
     - contents: {{ peer['public_key'] }}
 {% endif %}
   {% endfor %}
-  {% for peer in data['servers'] %}
-
-  {% endfor %}
 {% endfor %}
