@@ -15,7 +15,7 @@ wireguard_private_key:
     - group: root
     - mode: 600
     - contents: 
-      - {{ peer['private_key'] }}
+      - "{{ peer['private_key'] }}"
  
  wireguard_public_key:
   file.managed:
@@ -24,7 +24,7 @@ wireguard_private_key:
     - group: root
     - mode: 600
     - contents: 
-      - {{ peer['public_key'] }}
+      - "{{ peer['public_key'] }}"
 {% endif %}
 {% endfor %}
 
