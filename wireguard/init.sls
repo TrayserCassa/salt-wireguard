@@ -7,10 +7,12 @@ install_wireguard:
 {% for interface, data in pillar['wireguard'].items() %}
 
 wireguard_private_key:
-  file.line:
+  file.managed:
     - name: "/etc/wireguard/{{ interface }}.priv"
-    - mode: ensure
-    - content: {{ interface }}
+    - user: root
+    - group: root
+    - mode: 600
+    - contents: {{ interface }}
     
 {% endfor %}
 
