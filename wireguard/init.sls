@@ -4,8 +4,7 @@ install_wireguard:
     - pkgs: 
       - wireguard-tools 
 
-{% for interfaces in pillar['wireguard'] %}
-  {% for interface, data in interfaces %}
+{% for interface, data in pillar['wireguard'] %}
 
 wireguard_private_key:
   file.line:
@@ -13,6 +12,5 @@ wireguard_private_key:
     - mode: ensure
     - content: {{ interface }}
     
-  {% endfor %}
 {% endfor %}
 
