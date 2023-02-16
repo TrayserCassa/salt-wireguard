@@ -17,7 +17,7 @@ wireguard_private_key:
     - contents: 
       - "{{ peer['private_key'] }}"
  
- wireguard_public_key:
+wireguard_public_key:
   file.managed:
     - name: "/etc/wireguard/{{ interface }}.pub"
     - user: root
