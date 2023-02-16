@@ -1,5 +1,3 @@
-{% set config = salt['pillar.get']('wireguard', default=os_specific_defaults, merge=True) %}
-
 ## Installation
 wireguard.deps.installed:
   pkg.installed:
