@@ -5,7 +5,7 @@ install_wireguard:
       - wireguard-tools 
 
 {% for interface, data in pillar['wireguard'].items() %}
-  {% for peer in data['peers'] %}
+{% for peer in data['peers'] %}
 
 {% if peer['name'] == grains['nodename'] %}
 wireguard_private_key:
@@ -24,5 +24,8 @@ wireguard_private_key:
     - mode: 600
     - contents: {{ peer['public_key'] }}
 {% endif %}
-  {% endfor %}
+{% endfor %}
+
+{% for server in data['servers'] %}
+{% endfor %}
 {% endfor %}
