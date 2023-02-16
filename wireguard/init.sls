@@ -1,5 +1,6 @@
 ## Installation
-wireguard.deps.installed:
+install_wireguard:
   pkg.installed:
-    - pkgs: wireguard
+    - pkgs: 
+      - wireguard
 
