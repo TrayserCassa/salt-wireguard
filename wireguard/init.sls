@@ -4,7 +4,7 @@ install_wireguard:
     - pkgs: 
       - wireguard-tools 
 
-{% for interface in pillar['wireguard'] %}
+{% for interface, data in pillar['wireguard'] %}
 wireguard_private_key:
   file.line:
     - name: "/etc/wireguard/{{ interface }}.priv"
