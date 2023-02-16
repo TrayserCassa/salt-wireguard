@@ -6,6 +6,8 @@ install_wireguard:
 
 {% for interface, data in pillar['wireguard'].items() %}
   {% for peer in data['peers'] %}
+
+{% if peer['name'] == grains['nodename'] %}
 wireguard_private_key:
   file.managed:
     - name: "/etc/wireguard/{{ interface }}.priv"
@@ -21,5 +23,6 @@ wireguard_private_key:
     - group: root
     - mode: 600
     - contents: {{ peer['public_key'] }}
+{% endif %}
   {% endfor %}
 {% endfor %}
