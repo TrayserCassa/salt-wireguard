@@ -50,7 +50,7 @@ wireguard_config:
     {% for server in data['servers'] %}
 
         [Peer]
-        # {}{% server['name'] %}}
+        # {{ server['name'] }}
         PublicKey = {{ server['public_key'] }}
         AllowedIPs = {{ server['address'] }}
         Endpoint = {{ server['endpoint'] }}
