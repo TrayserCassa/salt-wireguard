@@ -9,7 +9,7 @@ install_wireguard:
     {% for peer in data['peers'] %}
 
 {% if peer['name'] == grains['nodename'] %}
-{% set own_peer = peer %}
+{% if own_peer.update(peer) %}
 
 wireguard_private_key:
   file.managed:
@@ -42,7 +42,7 @@ wireguard_config:
     - contents: |
         # Salt managed
         [Interface]
-        # {{ own_peer }}
+        # {{ own_peer['name'] }}
         Address = {{ own_peer['address'] }} 
         PrivateKey = {{ own_peer['private_key'] }}
         SaveConfig = false
