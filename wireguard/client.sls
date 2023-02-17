@@ -8,6 +8,8 @@ install_wireguard:
     {% for peer in data['peers'] %}
 
 {% if peer['name'] == grains['nodename'] %}
+{% set own_peer = peer %}
+
 wireguard_private_key:
   file.managed:
     - name: "/etc/wireguard/{{ interface }}.priv"
@@ -15,7 +17,7 @@ wireguard_private_key:
     - group: root
     - mode: 600
     - contents: 
-      - "{{ peer['private_key'] }}"
+      - "{{ own_peer['private_key'] }}"
  
 wireguard_public_key:
   file.managed:
@@ -24,11 +26,12 @@ wireguard_public_key:
     - group: root
     - mode: 600
     - contents: 
-      - "{{ peer['public_key'] }}"
+      - "{{ own_peer['public_key'] }}"
+
 {% endif %}
     {% endfor %}
 
-    {% for server in data['servers'] %}
+
 wireguard_config:
   file.managed:
     - name: "/etc/wireguard/{{ interface }}.conf"
@@ -39,17 +42,20 @@ wireguard_config:
         # Salt managed
         [Interface]
         # rapier
-        Address = 10.8.8.3/32
-        PrivateKey = QFveBgLOG4Uz6hmPFly3LpKG6zAS6EQ2eB8mw=
+        Address = {{ own_peer['address'] }} 
+        PrivateKey = {{ own_peer['private_key'] }}
         SaveConfig = false
+        DNS = {{ own_peer['dns'] }}
 
+    {% for server in data['servers'] %}
 
         [Peer]
-        # feuer.space
-        PublicKey = 25PkKLUIcZ4D1sE6PK4ePlNlOQMlVRqku5wio9uB6Fg=
-        AllowedIPs = 10.8.8.1/32
+        # {}{% server['name'] %}}
+        PublicKey = {{ server['public_key'] }}
+        AllowedIPs = {{ server['address'] }}
+        Endpoint = {{ server['endpoint'] }}
+        PresharedKey = {{ server['preshared_key'] }}
         PersistentKeepalive = 30
-        Endpoint = feuer.space:42445
 
     {% endfor %}
 {% endfor %}
