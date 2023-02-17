@@ -5,10 +5,11 @@ install_wireguard:
       - wireguard-tools 
 
 {% for interface, data in pillar['wireguard'].items() %}
+{% set own_peer = {} %}
     {% for peer in data['peers'] %}
 
 {% if peer['name'] == grains['nodename'] %}
-{% set own_peer = peer %}
+{% own_peer = peer %}
 
 wireguard_private_key:
   file.managed:
