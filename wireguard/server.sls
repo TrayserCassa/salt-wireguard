@@ -42,9 +42,10 @@ wireguard_config:
         # {{ own_server['name'] }}
         Address = {{ own_server['address'] }} 
         PrivateKey = {{ own_server['private_key'] }}
-        SaveConfig = false
+        ListenPort = {{ own_server['listen_port'] }}
         PostUp = {{ own_server['post_up'] }}
         PostDown = {{ own_server['post_down'] }}
+        SaveConfig = false
 
     {% for peer in data['peers'] %}
         [Peer]
