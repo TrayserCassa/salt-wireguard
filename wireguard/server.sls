@@ -45,6 +45,7 @@ wireguard_config:
         SaveConfig = false
         PostUp = {{ own_server['post_up'] }}
         PostDown = {{ own_server['post_down'] }}
+
     {% for peer in data['peer'] %}
         [Peer]
         # {{ peer['name'] }}
@@ -52,6 +53,7 @@ wireguard_config:
         AllowedIPs = {{ peer['address'] }}
         PresharedKey = {{ own_server['preshared_key'] }}
     {% endfor %}
+
     {% for server in data['server'] %}
         {%- if server['name'] == own_server['name'] %}
         {%- continue %}
