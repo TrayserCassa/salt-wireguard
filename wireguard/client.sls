@@ -47,9 +47,7 @@ wireguard_config:
         PrivateKey = {{ own_peer['private_key'] }}
         SaveConfig = false
         DNS = {{ own_peer['dns'] }}
-
     {% for server in data['servers'] %}
-
         [Peer]
         # {{ server['name'] }}
         PublicKey = {{ server['public_key'] }}
@@ -57,6 +55,5 @@ wireguard_config:
         Endpoint = {{ server['endpoint'] }}
         PresharedKey = {{ server['preshared_key'] }}
         PersistentKeepalive = 30
-
     {% endfor %}
 {% endfor %}
