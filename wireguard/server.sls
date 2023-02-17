@@ -8,7 +8,7 @@ install_wireguard:
 {% for interface, data in pillar['wireguard'].items() %}
     {% for server in data['servers'] %}
         {% if server['name'] == grains['nodename'] %}
-            {% if own_server.update(peer) %}{% endif %}
+            {% if own_server.update(server) %}{% endif %}
 wireguard_private_key:
   file.managed:
     - name: "/etc/wireguard/{{ interface }}.priv"
