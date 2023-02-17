@@ -4,6 +4,11 @@ install_wireguard:
     - pkgs: 
       - wireguard-tools 
 
+wireguard_forwarding:
+  sysctl.present:
+    - name: net.ipv4.ip_forward
+    - value: 1
+
 {% set own_server = {} %}
 {% for interface, data in pillar['wireguard'].items() %}
     {% for server in data['servers'] %}
