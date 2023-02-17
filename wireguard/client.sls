@@ -56,6 +56,6 @@ wireguard_config:
         AllowedIPs = {{ server['address'] }}
         Endpoint = {{ server['endpoint'] }}
         PresharedKey = {{ server['preshared_key'] }}
-        PersistentKeepalive = 30
+        PersistentKeepalive = 25
     {% endfor %}
 {% endfor %}
