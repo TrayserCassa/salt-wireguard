@@ -9,7 +9,7 @@ install_wireguard:
     {% for peer in data['peers'] %}
 
 {% if peer['name'] == grains['nodename'] %}
-{% if own_peer.update(peer) %}
+{% own_peer.update(peer) %}
 
 wireguard_private_key:
   file.managed:
