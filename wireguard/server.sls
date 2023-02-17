@@ -46,7 +46,7 @@ wireguard_config:
         PostUp = {{ own_server['post_up'] }}
         PostDown = {{ own_server['post_down'] }}
 
-    {% for peer in data['peer'] %}
+    {% for peer in data['peers'] %}
         [Peer]
         # {{ peer['name'] }}
         PublicKey = {{ peer['public_key'] }}
@@ -54,7 +54,7 @@ wireguard_config:
         PresharedKey = {{ own_server['preshared_key'] }}
     {% endfor %}
 
-    {% for server in data['server'] %}
+    {% for server in data['servers'] %}
         {%- if server['name'] == own_server['name'] %}
         {%- continue %}
         {%- endif %}
