@@ -42,7 +42,7 @@ wireguard_config:
     - contents: |
         # Salt managed
         [Interface]
-        # rapier
+        # {{ own_peer }}
         Address = {{ own_peer['address'] }} 
         PrivateKey = {{ own_peer['private_key'] }}
         SaveConfig = false
