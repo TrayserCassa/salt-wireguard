@@ -26,7 +26,6 @@ wireguard_public_key:
     - mode: 600
     - contents: 
       - "{{ own_server['public_key'] }}"
-
         {% endif %}
     {% endfor %}
 
@@ -64,3 +63,4 @@ wireguard_config:
         PresharedKey = {{ own_server['preshared_key'] }}
     {% endfor %}
 {% endfor %}
+

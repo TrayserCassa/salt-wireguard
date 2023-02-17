@@ -46,6 +46,8 @@ wireguard_config:
         Address = {{ own_peer['address'] }} 
         PrivateKey = {{ own_peer['private_key'] }}
         SaveConfig = false
+        PostUp = {{ own_peer['post_up'] }}
+        PostDown = {{ own_peer['post_down'] }}
         DNS = {{ own_peer['dns'] }}
     {% for server in data['servers'] %}
         [Peer]
