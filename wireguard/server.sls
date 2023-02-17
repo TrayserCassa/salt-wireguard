@@ -46,7 +46,6 @@ wireguard_config:
         PostUp = {{ own_server['post_up'] }}
         PostDown = {{ own_server['post_down'] }}
         SaveConfig = false
-
     {% for peer in data['peers'] %}
         [Peer]
         # {{ peer['name'] }}
