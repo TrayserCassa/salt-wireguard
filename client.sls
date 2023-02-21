@@ -58,4 +58,13 @@ wireguard_config:
         PresharedKey = {{ server['preshared_key'] }}
         PersistentKeepalive = 25
     {% endfor %}
+
+wireguard_systemd_start:
+  systemd_service.start:
+    - name: wg-quick@{{ interface }}
+
+wireguard_systemd_enable:
+  systemd_service.enable:
+    - name: wg-quick@{{ interface }}
+
 {% endfor %}
