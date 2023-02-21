@@ -63,5 +63,7 @@ wireguard_systemd_enable:
   service.running:
     - name: wg-quick@{{ interface }}
     - enable: True
+    - watch:
+       - file: wireguard_config
 
 {% endfor %}
