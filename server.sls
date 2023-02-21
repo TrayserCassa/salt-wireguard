@@ -68,13 +68,10 @@ wireguard_config:
         PresharedKey = {{ own_server['preshared_key'] }}
     {% endfor %}
 
-wireguard_systemd_start:
-  systemd_service.start:
-    - name: wg-quick@{{ interface }}
-
 wireguard_systemd_enable:
-  systemd_service.enable:
+  service.running:
     - name: wg-quick@{{ interface }}
+    - enable: True
 
 {% endfor %}
 
