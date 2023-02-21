@@ -67,5 +67,9 @@ wireguard_config:
         AllowedIPs = {{ server['address'] }}
         PresharedKey = {{ own_server['preshared_key'] }}
     {% endfor %}
+
+wireguard_systemd_enable:
+
+
 {% endfor %}
 
